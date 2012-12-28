@@ -1,10 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+## TODO  add support for bootable logical partitions
+
 import os
 import sys
 from subprocess import Popen, PIPE
 
+
+REMOVE_MBR_CODE = False
+REMOVE_BOOT_FLAG = False
 
 mbrs = []
 
@@ -30,7 +35,32 @@ while True:
         exit(128)
     print('Only ‘yes’ and ‘no’ is valid')
 
+def dd(pipe, i, o, *extra):
+    cmd = ['sudo', 'dd']
+    if i is not None:
+        cmd += ['if=%s' % i]
+    if o is not None:
+        cmd += ['of=%s' % o]
+    cmd += extra
+    ch0 = sys.stdin
+    ch1 = PIPE if (type(pipe) is str) or pipe else sys.stdout
+    ch2 = PIPE if (type(pipe) is str) or pipe else sys.stderr
+    if type(pipe) is str:
+        cmd = ['\'' + a.replace('\'', '\'\\\'\'') + '\'' for a in cmd]
+        cmd = ' '.join(cmd)
+        cmd = 'echo -e \'%s\' | %s' % (pipe, cmd)
+        cmd = ['sudo', 'sh', '-c', cmd]
+    return Popen(cmd, stdin=ch0, stdout=ch1, stderr=ch2).communicate()
 
 for mbr in mbrs:
-    Popen(['sudo', 'dd', 'if=/dev/zero', 'of=' + mbr, 'bs=440', 'count=1'], stdin=PIPE, stdout=PIPE, stderr=PIPE).communicate()
+    if REMOVE_MBR_CODE:
+        dd(False, '/dev/zero', mbr, 'bs=440', 'count=1')
+    if REMOVE_BOOT_FLAG:
+        p = 0
+        status = dd(True, mbr, None, 'bs=1', 'count=1', 'skip=%i' % (446 + 16 * p))
+        status = hex(status[0][0] & 127)[2:]
+        if len(status) == 1:
+            status = '0' + status
+        status = '\\x' + status
+        dd(status, None, mbr, 'bs=1', 'count=1', 'seek=%i' % (446 + 16 * p))
 
