@@ -54,7 +54,7 @@ dvi.xz: $(BOOK).dvi.xz
 
 install:
 	mkdir -p "$(DESTDIR)$(PREFIX)$(BIN)"
-	install -m 755 "$(PROGRAM)" "$(DESTDIR)$(PREFIX)$(BIN)/$(PROGRAM)"
+	install -m 755 "$(PROGRAM).py" "$(DESTDIR)$(PREFIX)$(BIN)/$(PROGRAM)"
 	mkdir -p "$(DESTDIR)$(PREFIX)$(DATA)/licenses/$(PROGRAM)"
 	mkdir -p "$(DESTDIR)$(PREFIX)$(DATA)/info/"
 	install -m 644 COPYING "$(DESTDIR)$(PREFIX)$(DATA)/licenses/$(PROGRAM)"
