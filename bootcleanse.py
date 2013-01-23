@@ -25,14 +25,14 @@ import sys
 from subprocess import Popen, PIPE
 
 
-REMOVE_MBR_CODE = False
-REMOVE_BOOT_FLAG = False
+REMOVE_MBR_CODE = True
+REMOVE_BOOT_FLAG = True
 
 mbrs = []
 
 for arg in sys.argv[1:]:
     mbrs.append(arg)
-    print('Remove MBR code from ' + arg)
+    print('Remove MBR code from and deactive boot flag on primary paritions in ' + arg)
     if not (('a' <= arg[-1]) and (arg[-1] <= 'z') and (arg[:-1] in ('/dev/sd', '/dev/hd'))):
         print('\033[01;33mWarning:\033[21;39m Does not match /dev/(sd|hd)[a-z]')
 
@@ -73,11 +73,11 @@ for mbr in mbrs:
     if REMOVE_MBR_CODE:
         dd(False, '/dev/zero', mbr, 'bs=440', 'count=1')
     if REMOVE_BOOT_FLAG:
-        p = 0
-        status = dd(True, mbr, None, 'bs=1', 'count=1', 'skip=%i' % (446 + 16 * p))
-        status = hex(status[0][0] & 127)[2:]
-        if len(status) == 1:
-            status = '0' + status
-        status = '\\x' + status
-        dd(status, None, mbr, 'bs=1', 'count=1', 'seek=%i' % (446 + 16 * p))
+        for p in range(0, 4):
+            status = dd(True, mbr, None, 'bs=1', 'count=1', 'skip=%i' % (446 + 16 * p))
+            status = hex(status[0][0] & 127)[2:]
+            if len(status) == 1:
+                status = '0' + status
+            status = '\\x' + status
+            dd(status, None, mbr, 'bs=1', 'count=1', 'seek=%i' % (446 + 16 * p))
 
