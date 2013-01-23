@@ -41,7 +41,7 @@ print('to back up the first 512 byte of each defected file.')
 print('To back up run `dd if=DEVICE bs=512 count=1 > DEV.backup`.')
 print('To restore run `dd of=DEVICE bs=512 count=1 if=DEV.backup`.')
 print()
-print('\033[01mProcessed? [yes/no]\033[21m')
+print('\033[01mProceed? [yes/no]\033[21m')
 
 while True:
     yn = input()

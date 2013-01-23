@@ -54,6 +54,7 @@ Texts. A copy of the license is included in the section entitled
 
 @menu
 * Overview::                        Overview of @command{bootcleanse}
+* Invoking::                        Invoking @command{bootcleanse}
 * License of bootcleanse::          Summary of the license of the program
 * GNU General Public License::      The license of the program
 * GNU Free Documentation License::  The license of this manual
@@ -67,13 +68,32 @@ Texts. A copy of the license is included in the section entitled
 @cindex overview
 @cindex description
 
-bootcleanse is a simple script to remove old stuff from your boot
-sequence; just another part of cleaning your system from old crap.
-It is not very configurable, if you want something specific than
-removing the MBR and all boot flags (on primary partitions) from
-a set of drives you may want to copy the script and end it do
+@command{bootcleanse} is a simple script to remove old stuff from
+your boot sequence; just another part of cleaning your system from
+old crap. It is not very configurable, if you want something specific
+than removing the MBR and all boot flags (on primary partitions)
+from a set of drives you may want to copy the script and end it do
 do exactly want you want, but the chance of you needing to do that
 is extremely small.
+
+
+@node Invoking
+@chapter Invoking
+@cindex invoking
+@cindex arguments
+@cindex options
+@cindex executing
+@cindex running
+
+@command{bootcleanse} requires (unless you have an customised,
+unsecure system setup) super user and will tell you want it is
+about to do and ask if it sould proceed.
+
+@command{bootcleanse} takes no options, but takes all arguments
+and assumes those are the drives you want to remove the MBR code
+and boot flags from.
+
+
 
 
 @node License of bootcleanse
