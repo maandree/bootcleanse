@@ -67,6 +67,13 @@ Texts. A copy of the license is included in the section entitled
 @cindex overview
 @cindex description
 
+bootcleanse is a simple script to remove old stuff from your boot
+sequence; just another part of cleaning your system from old crap.
+It is not very configurable, if you want something specific than
+removing the MBR and all boot flags (on primary partitions) from
+a set of drives you may want to copy the script and end it do
+do exactly want you want, but the chance of you needing to do that
+is extremely small.
 
 
 @node License of bootcleanse
