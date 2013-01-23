@@ -3,7 +3,7 @@
 '''
 bootcleanse – Cleanse your system from old MBR codes and boot flags
 
-Copyright © 2012  Mattias Andrée (maandree@kth.se)
+Copyright © 2012, 2013  Mattias Andrée (maandree@member.fsf.org)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ print()
 print('If you are not sure what you are doing, you may want')
 print('to back up the first 512 byte of each defected file.')
 print('To back up run `dd if=DEVICE bs=512 count=1 > DEV.backup`.')
-print('To restore run `dd of=DEVICE bs=512 count=1 is=DEV.backup`.')
+print('To restore run `dd of=DEVICE bs=512 count=1 if=DEV.backup`.')
 print()
 print('\033[01mProcessed? [yes/no]\033[21m')
 
