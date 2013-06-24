@@ -10,8 +10,8 @@
 PREFIX = /usr
 DATA = /share
 BIN = /bin
-PKGNAME = mongoclock
-COMMAND = mongoclock
+PKGNAME = bootcleanse
+COMMAND = bootcleanse
 LICENSES = $(PREFIX)$(DATA)
 
 BOOK=bootcleanse
