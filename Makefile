@@ -15,7 +15,7 @@ COMMAND = mongoclock
 LICENSES = $(PREFIX)$(DATA)
 
 BOOK=bootcleanse
-BOOKDIR=./
+BOOKDIR=info/
 
 
 all: info
