@@ -2,8 +2,6 @@ _/
 __pycache__/
 .*
 !.git*
-/dist/archlinux/stable/*
-!/dist/archlinux/stable/PKGBUILD
 *~
 \#*\#
 *.bak
